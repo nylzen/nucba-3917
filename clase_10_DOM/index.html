@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://res.cloudinary.com/dwmqwjm3y/raw/upload/v1676574202/nucba/stylescdn_u7mjb9.css"
+    />
+    <title>2.10 DOM</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="titulo1">2.10 DOM</h1>
+      <p>
+        Llegamos al DOM! Vamos a ver que es el DOM y como funciona. Ahora todo
+        va a empezar a cobrar un poco de sentido, vamos a poder manipular el
+        HTML/CSS desde JS 😍🙌
+      </p>
+      <h2>Recursos de la clase:</h2>
+      <ul>
+        <li>📌<a href="https://www.w3schools.com/js/js_htmldom.asp">DOM</a></li>
+        <li>
+          📌<a
+            href="https://developer.mozilla.org/es/docs/Web/API/Document_object_model/Locating_DOM_elements_using_selectors"
+            >Localizando elementos mediante selectores</a
+          >
+        </li>
+      </ul>
+    </header>
+    <main>
+      <hr class="hr" />
+      <h3>Veamos la consola 👉 o no? 😎</h3>
+
+      <!-- getElementById() -->
+
+      <h2>getElementById()()</h2>
+      <div class="header">
+        <a href="#" id="logo">Logo</a>
+      </div>
+
+      <!-- getElementsByClassname() -->
+      <!-- ul>li*3{texto $} -->
+      <h2>getElementsByClassname</h2>
+      <ul>
+        <li class="link">Item 1</li>
+        <li class="link">Item 2</li>
+        <li class="link">Item 3</li>
+      </ul>
+
+      <!-- getElementByTagName() -->
+      <h2>getElementByTagName</h2>
+      <div class="tag">
+        <p>Item 1</p>
+        <p>Item 2</p>
+        <p>Item 3</p>
+        <p>Item 4</p>
+        <p>Item 5</p>
+      </div>
+
+      <!-- querySelector() -->
+      <section class="section">
+        <div id="caja1"><p>Holi</p></div>
+
+        <div class="caja2">
+          <p>Holaaaaaaa</p>
+        </div>
+      </section>
+
+      <p id="lista"></p>
+      <ul>
+        <li class="link2">Item 1</li>
+        <li class="link2">Item 2</li>
+        <li class="link2">Item 3</li>
+      </ul>
+
+
+      <!-- lista -->
+      <ul id="nombres"></ul>
+
+      <div id="productos"></div>
+    </main>
+    <!-- scripts -->
+    <script src="./main.js"></script>
+  </body>
+</html>

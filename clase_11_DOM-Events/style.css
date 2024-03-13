@@ -1,0 +1,21 @@
+.div {
+  background: green;
+  border: 1px solid red;
+  padding: 20px 40px;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px ;
+  gap: 10px;
+}
+
+.ocultar {
+  opacity: 0;
+}

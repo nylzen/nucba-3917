@@ -213,7 +213,6 @@ const validateForm = (e) => {
   }
 }
 
-
 // Funcion init
 const init = () => {
   registerForm.addEventListener('submit', validateForm)

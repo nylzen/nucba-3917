@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Repaso</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        color-scheme: dark;
+      }
+      p {
+        /* font-size: 2rem; */
+        font-family: Arial, sans-serif;
+      }
+
+      section {
+        padding-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh;
+        gap: 2rem;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Messi</h1>
+    <section>
+      <form id="form">
+        <input type="text" placeholder="Ej 1,2,3,4,5" />
+        <button>Buscar</button>
+      </form>
+      <p id="error"></p>
+
+      <div id="caja"></div>
+      <img src="" alt="" id="img">
+    </section>
+
+    <p id="texto"></p>
+    <script src="./main.js"></script>
+  </body>
+</html>

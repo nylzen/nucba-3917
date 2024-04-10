@@ -135,3 +135,26 @@ const productsData = [
     cardImg: "./assets/img/products/jolie.png",
   },
 ];
+
+// Funcion para dividir mi array en 'SIZE' partes
+const divideProductsInParts = (size) => {
+  let productsList = []
+
+  for(let i = 0; i < productsData.length; i += size){
+    productsList.push(productsData.slice(i, i + size))
+  }
+
+  return productsList
+}
+
+// console.log(divideProductsInParts(6))
+
+// El state
+const appState = {
+  products: divideProductsInParts(6),
+  currentProductsIndex: 0,
+  productsLimit: divideProductsInParts(6).length,
+  activeFilter: null
+}
+
+console.log(appState)

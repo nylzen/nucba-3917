@@ -149,12 +149,15 @@ const divideProductsInParts = (size) => {
 
 // console.log(divideProductsInParts(6))
 
+// MAGIC STRINGS
+const PRODUCTS_SIZE = 6
+
 // El state
 const appState = {
-  products: divideProductsInParts(6),
+  products: divideProductsInParts(PRODUCTS_SIZE),
   currentProductsIndex: 0,
-  productsLimit: divideProductsInParts(6).length,
-  activeFilter: null
+  productsLimit: divideProductsInParts(PRODUCTS_SIZE).length,
+  activeFilter: null,
 }
 
 console.log(appState)

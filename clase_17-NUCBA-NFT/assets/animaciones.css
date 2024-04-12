@@ -30,12 +30,15 @@ html {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   display: none;
+  /* opacity: 0; */
+  transition: all 0.3s ease;
 }
 
 /*Toggle para el overlay (para que funcione unicamente cuando abrimos carrito o menu hamburguesa.
   Aclarar que funciona porque son elementos hermanos y overlay esta debajo de los dos inputs en el código.*/
 .show-overlay {
   display: block;
+  /* opacity: 1; */
 }
 
 /*Hover de los elementos "a" del navbar*/

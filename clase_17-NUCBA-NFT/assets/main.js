@@ -19,16 +19,22 @@ const menuBtn = document.querySelector(".menu-label");
 // menu lista
 const menu = document.querySelector(".navbar-list");
 // Total de precio en el carrito
-const total = document.querySelector('.total')
+const total = document.querySelector(".total");
 // cart bubble
-const cartBubble = document.querySelector('.cart-bubble')
+const cartBubble = document.querySelector(".cart-bubble");
+// Modal
+const successModal = document.querySelector(".add-modal");
+// Boton comprar
+const buyBtn = document.querySelector(".btn-buy");
+// Boton vaciar carrito
+const deleteBtn = document.querySelector(".btn-delete");
 
 // SETEAMOS EL CARRITO, VACIO
-let cart = JSON.parse(localStorage.getItem('cart')) || []
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const saveCartLocalStorage = () => {
-  localStorage.setItem('cart', JSON.stringify(cart))
-}
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
 
 // {
 //   id: 1,
@@ -193,9 +199,9 @@ const createCartProductTemplate = (cartProduct) => {
             <span class="item-price">${bid} ETH</span>
           </div>
           <div class="item-handler">
-            <span class="quantity-handler down">-</span>
+            <span class="quantity-handler down" data-id=${id}>-</span>
             <span class="item-quantity">${quantity}</span>
-            <span class="quantity-handler up">+</span>
+            <span class="quantity-handler up" data-id=${id}>+</span>
          </div>
    </div>
   `;
@@ -203,35 +209,46 @@ const createCartProductTemplate = (cartProduct) => {
 
 // Funcion para el render
 const renderCart = () => {
-  if(!cart.length){
-    productsCart.innerHTML = `<p class="empty-msg">No hay productos en el carrito</p>`
-    return
+  if (!cart.length) {
+    productsCart.innerHTML = `<p class="empty-msg">No hay productos en el carrito</p>`;
+    return;
   }
   productsCart.innerHTML = cart.map(createCartProductTemplate).join("");
 };
 
 // Funcion para obtener el total de la compra
 const getCartTotal = () => {
-  return cart.reduce((acc, cur) => acc + Number(cur.bid) * cur.quantity, 0)
-}
+  return cart.reduce((acc, cur) => acc + Number(cur.bid) * cur.quantity, 0);
+};
 
 // Funcion para mostrar el total
 const showCartTotal = () => {
-  total.innerHTML = `${getCartTotal().toFixed(2)} ETH`
-}
+  total.innerHTML = `${getCartTotal().toFixed(2)} ETH`;
+};
 
 // Funcion para actualizar la burbuja de cantidad
 const renderCartBubble = () => {
-  cartBubble.textContent = cart.reduce((acc, cur) => acc + cur.quantity, 0)
-}
+  cartBubble.textContent = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+};
 
+// Funcion para habilitar o deshabilitar botones
+const disableBtn = (btn) => {
+  if (!cart.length) {
+    btn.classList.add("disabled");
+  } else {
+    btn.classList.remove("disabled");
+  }
+};
 
+// Funcion para updatear el estado del carro
 const updateCartState = () => {
-  saveCartLocalStorage()
-  showCartTotal()
-  renderCart()
-  renderCartBubble()
-}
+  saveCartLocalStorage();
+  showCartTotal();
+  renderCart();
+  renderCartBubble();
+  disableBtn(buyBtn)
+  disableBtn(deleteBtn)
+};
 
 // Funcion para agregar producto
 const addProduct = ({ target }) => {
@@ -240,13 +257,12 @@ const addProduct = ({ target }) => {
   //Si el producto ya existe en el carrito vamos a agregar una nueva unidad
   if (isExistingProductInCart(product)) {
     addUnitToProduct(product);
-    console.log(cart);
-    return;
+    showSuccessModal("Agregaste una nueva unidad");
   } else {
     createCartProduct(product);
+    showSuccessModal("Producto agregado");
   }
-  updateCartState()
-  console.log(cart);
+  updateCartState();
 };
 
 // Funcion para agregar una unidad a un producto que ya tengamos en el carro
@@ -280,9 +296,103 @@ const createProductData = (product) => {
   };
 };
 
+// Funcion para mostrar el modal de compra
+const showSuccessModal = (msg) => {
+  successModal.classList.add("active-modal");
+  successModal.textContent = msg;
+
+  setTimeout(() => {
+    successModal.classList.remove("active-modal");
+  }, 1500);
+};
+
 // DATASET es el data-ALGO que agregamos en la etiqueta html
 // Devuelve el numero en ms desde 197y algo hasta ahora
 // console.log(Date.now())
+
+// Funcion para manejar el evento + del producto en el carrito
+const handlePlusBtnEvent = (id) => {
+  const existingCartProduct = cart.find((item) => item.id === id);
+  //  console.log(id)
+  //  console.log(existingCartProduct)
+  // El find nos va a devolver el OBJETO del id del producto que queremos sumar la cantidad
+  addUnitToProduct(existingCartProduct);
+};
+
+// Funcion para manejar el evento - del producto en el carrito
+const handleMinusBtnEvent = (id) => {
+  const existingCartProduct = cart.find((item) => item.id === id);
+
+  if (existingCartProduct.quantity === 1) {
+    if (window.confirm("Deseas eliminar el producto?")) {
+      removeProductFromCart(existingCartProduct);
+    }
+    return;
+  }
+
+  substractProductUnit(existingCartProduct);
+};
+
+// Funcion para restar una unidad al producto
+const substractProductUnit = (existingCartProduct) => {
+  cart = cart.map((product) => {
+    return product.id === existingCartProduct.id
+      ? { ...product, quantity: Number(product.quantity) - 1 }
+      : product;
+  });
+};
+
+// [1,2,3,4,5]
+// 1
+// [2,3,4,5]
+
+// Funcion para borar el producto del carro
+const removeProductFromCart = (existingCartProduct) => {
+  cart = cart.filter((product) => product.id !== existingCartProduct.id);
+  updateCartState();
+};
+
+// Funcion para manejar la cantidad de los productos en el carro
+const handleQuantity = (e) => {
+  // console.log(e.target)
+  if (e.target.classList.contains("up")) {
+    // console.log(e.target.dataset.id)
+    handlePlusBtnEvent(e.target.dataset.id);
+  } else if (e.target.classList.contains("down")) {
+    // console.log(e.target.dataset.id)
+    handleMinusBtnEvent(e.target.dataset.id);
+  }
+
+  updateCartState();
+};
+
+// Funcion para vaciar el carro
+const resetCartItems = () => {
+  cart = [];
+  updateCartState();
+};
+
+// Funcion para completar la accion del carrito
+const completarCartAction = (confirmMsg, successMsg) => {
+  if (!cart.length) return;
+  if (window.confirm(confirmMsg)) {
+    resetCartItems();
+    alert(successMsg);
+  }
+};
+
+// Funcion para borrar el carro
+const deleteCart = () => {
+  completarCartAction(
+    "Deseas borrar el carrito?",
+    "No hay mas productos en el carro"
+  );
+};
+
+// Funcion para cuando se complete la compra
+const completeBuy = () => {
+  completarCartAction("Deseas completar tu compra?", "Gracias por tu compra!");
+};
 
 // [[],[],[]]
 const init = () => {
@@ -297,11 +407,16 @@ const init = () => {
   menu.addEventListener("click", closeOnClick);
 
   // cart
-  document.addEventListener('DOMContentLoaded', renderCart)
-  document.addEventListener('DOMContentLoaded', showCartTotal)
+  document.addEventListener("DOMContentLoaded", renderCart);
+  document.addEventListener("DOMContentLoaded", showCartTotal);
 
   productsContainer.addEventListener("click", addProduct);
-  renderCartBubble(cart)
+  productsCart.addEventListener("click", handleQuantity);
+  deleteBtn.addEventListener("click", deleteCart);
+  buyBtn.addEventListener("click", completeBuy);
+  renderCartBubble(cart);
+  disableBtn(buyBtn)
+  disableBtn(deleteBtn)
 };
 
 init();

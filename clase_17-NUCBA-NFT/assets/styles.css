@@ -21,6 +21,10 @@
   --electric: #64d3ff;
 }
 
+body {
+  user-select: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -132,6 +136,8 @@ header {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow: scroll;
+  height: 800px;
 }
 /*OCULTAR BARRA DE SCROLL DEL CARRITO*/
 

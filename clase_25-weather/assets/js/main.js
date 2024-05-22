@@ -32,6 +32,7 @@ const getCityData = (cityData) => {
 //  <img src="https://openweathermap.org/img/wn/${image}@2x.png"/>
 
 const createCityTemplateHTML = (cityData) => {
+
   const {
     cityName,
     image,
@@ -67,6 +68,20 @@ const createCityTemplateHTML = (cityData) => {
   `;
 };
 
+// const createCityTemplateHTML = (cityData) => {
+
+
+
+//   return `
+//         <div class="weather-card animate">
+//           <div class="weather-info-container">
+//             <h2 class="weather-title">${cityData.name}</h2>
+//             <p class="weather-description">${ cityData.weather[0].description}</p>
+//           </div>
+//         </div>
+//   `;
+// };
+
 // Funcion para mostrarlo en el html
 const renderCityCard = (cityData) => {
   cardContainer.innerHTML = createCityTemplateHTML(cityData);
@@ -82,6 +97,7 @@ const changeSearchMsg = (cityData) => {
 const searchCity = async (e) => {
   e.preventDefault();
   const searchedCity = cityInput.value.trim();
+  console.log(searchedCity)
 
   if (searchedCity === "") {
     // alert("Ingresa una ciudad");

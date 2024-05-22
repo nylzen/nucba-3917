@@ -1,0 +1,72 @@
+/* tipos */
+.normal {
+  background-color: #aa9;
+}
+
+.fire {
+  background-color: #f42;
+}
+
+.grass {
+  background-color: #7c5;
+}
+
+.poison {
+  background-color: #a59;
+}
+
+.water {
+  background-color: #39f;
+}
+
+.electric {
+  background-color: #fc3;
+}
+
+.ice {
+  background-color: #6cf;
+}
+
+.fighting {
+  background-color: #b54;
+}
+
+.ground {
+  background-color: #db5;
+}
+
+.flying {
+  background-color: #89f;
+}
+
+.psychic {
+  background-color: #f59;
+}
+
+.bug {
+  background-color: #ab2;
+}
+
+.rock {
+  background-color: #ba6;
+}
+
+.ghost {
+  background-color: #66b;
+}
+
+.dragon {
+  background-color: #76e;
+}
+
+.dark {
+  background-color: rgb(7, 3, 1);
+}
+
+.steel {
+  background-color: #aab;
+}
+
+.fairy {
+  background-color: #e9e;
+}

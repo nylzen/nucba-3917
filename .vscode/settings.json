@@ -1,3 +1,4 @@
 {
-  "window.zoomLevel": 1.5
+  "window.zoomLevel": 1.5,
+  "liveServer.settings.port": 5501
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .categories {
+        display: none;
+      }
+
+      .show {
+        display:block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ol>
+          <li><a href="#">1</a></li>
+        </ol>
+        <ul>
+          <li><a href="#">2</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">3</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="user-container"></div>
+      <section>#HERO</section>
+      <section>
+        <h1>#Productos</h1>
+        <div class="categories">
+          <button data-filter="peliculas">Categoria 1</button>
+          <button>Categoria 2</button>
+          <button>Categoria 3</button>
+        </div>
+        <button id="mostrar">mostrar</button>
+        <div class="container">
+          <p>Ordenar por precio</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

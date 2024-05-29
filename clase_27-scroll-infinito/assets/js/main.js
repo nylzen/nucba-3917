@@ -110,12 +110,16 @@ const loadNextPokemons = async () => {
   }
 };
 
+const pepito = (pokemon) => {
+  console.log('HOLA', pokemon)
+}
+
 const init = () => {
-  window.addEventListener(
-    "DOMContentLoaded",
-    async () => await loadAndRenderPokemons(renderPokemonList)
+  window.addEventListener("DOMContentLoaded", () =>
+    loadAndRenderPokemons(renderPokemonList)
   );
   window.addEventListener("scroll", async () => await loadNextPokemons());
+  window.addEventListener('DOMContentLoaded', () => loadAndRenderPokemons(pepito))
 };
 
 init();

@@ -1,0 +1,10 @@
+.container {
+  border: 1px solid crimson;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.titulo {
+  font-size: 4rem;
+  color: greenyellow;
+}

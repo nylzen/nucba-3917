@@ -1,35 +1,20 @@
-import { useState } from "react";
 import { Card } from "../Home/HomeStyles";
 import { Button, LoginContainer, LoginForm } from "./LoginStyles";
 import { useNavigate } from "react-router-dom";
-
-const initialState = {
-  username: "",
-  password: "",
-};
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 function Login() {
+  const { handleSubmit, handleChange, isAuth } = useContext(AuthContext);
+
   const navigate = useNavigate();
-  const [form, setForm] = useState(initialState);
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!form.username.trim() || !form.password.trim()) {
-      alert("Completa los datos, rey");
-      return;
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
     }
-
-    setForm(initialState);
-    navigate(`/user/${form.username}`);
-  };
+  }, [isAuth, navigate]);
 
   return (
     <LoginContainer>

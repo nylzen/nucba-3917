@@ -62,7 +62,7 @@ export const CartNavStyled = styled.div`
 
   span {
     position: absolute;
-    top: 0;
+    top: 0px;
 
     height: 20px;
     width: 20px;
@@ -72,7 +72,7 @@ export const CartNavStyled = styled.div`
     border: 1px solid white;
     color: white;
     background-color: red;
-    font-size: 0.9rem;
+    font-size: .9rem;
   }
 `;
 

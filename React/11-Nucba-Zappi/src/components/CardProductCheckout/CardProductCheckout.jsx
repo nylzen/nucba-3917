@@ -1,10 +1,10 @@
-import { formatPrice } from '../../utils';
+import { formatPrice } from "../../utils";
 
-import { BsPlusLg } from 'react-icons/bs';
-import { FaMinus } from 'react-icons/fa';
+import { BsPlusLg } from "react-icons/bs";
+import { FaMinus } from "react-icons/fa";
 
-import Count from '../UI/Count/Count';
-import Increase from '../UI/Increase/Increase';
+import Count from "../UI/Count/Count";
+import Increase from "../UI/Increase/Increase";
 
 import {
   CardContainerStyled,
@@ -13,29 +13,31 @@ import {
   ProductTitleStyled,
   TextStyled,
   QuantityContainerStyled,
-} from './CardProductCheckoutStyles';
+} from "./CardProductCheckoutStyles";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/cart/cartSlice";
+import { IoMdTrash } from "react-icons/io";
 
-const CardProductCheckout = () => {
+const CardProductCheckout = ({ id, img, title, price, quantity, desc }) => {
+  const dispatch = useDispatch();
+
   return (
     <CardContainerStyled>
-      <img
-        src='https://res.cloudinary.com/dcatzxqqf/image/upload/v1656648456/coding/NucbaZappi/Productos/muzza-mentolada_fmh9at.png'
-        alt='La Aco'
-      />
+      <img src={img} alt={title} />
       <CardInfoStyled>
-        <ProductTitleStyled>La Aco</ProductTitleStyled>
-        <TextStyled>Cheta la gorra</TextStyled>
-        <PriceStyled>{formatPrice(3000)}</PriceStyled>
+        <ProductTitleStyled>{title}</ProductTitleStyled>
+        <TextStyled>{desc}</TextStyled>
+        <PriceStyled>{formatPrice(price)}</PriceStyled>
       </CardInfoStyled>
       <QuantityContainerStyled>
         <Increase
-          bgColor='var(--btn-gradient-secondary)'
-          onClick={e => e.preventDefault()}
+          bgColor="var(--btn-gradient-secondary)"
+          onClick={() => dispatch(removeFromCart(id))}
         >
-          <FaMinus />
+          {quantity === 1 ? <IoMdTrash /> : <FaMinus />}
         </Increase>
-        <Count>{3}</Count>
-        <Increase onClick={e => e.preventDefault()}>
+        <Count>{quantity}</Count>
+        <Increase onClick={() => dispatch(addToCart({ id, img, title, price, quantity, desc }))}>
           <BsPlusLg />
         </Increase>
       </QuantityContainerStyled>

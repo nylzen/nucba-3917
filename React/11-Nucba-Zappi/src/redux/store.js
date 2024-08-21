@@ -7,19 +7,21 @@ import categoriesReducer from "./categoriesSlice/categoriesSlice";
 import productsReducer from "./productsSlice/products.slice";
 import recommendedReducer from "./recommended/recommendedSlice";
 import cartReducer from './cart/cartSlice'
+import userReducer from './user/userSlice'
 
 const reducers = combineReducers({
   // ... recomendados / categorias / productos / carrito / user
   categories: categoriesReducer,
   products: productsReducer,
   recommended: recommendedReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  user: userReducer
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ['cart'],
+  whitelist: ['cart','user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

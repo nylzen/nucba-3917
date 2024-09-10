@@ -10,10 +10,12 @@ import { createUser } from "../../axios/axios-user";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../redux/user/userSlice";
 import useRedirect from "../../hooks/useRedirect";
+import { useLocation } from "react-router-dom";
 
 const Register = () => {
+  const { state } = useLocation()
   const dispatch = useDispatch();
-  useRedirect('/')
+  useRedirect(state?.redirectedFromCheckout ? '/checkout' : '/')
   return (
     <LoginContainerStyled>
       <h1>Crea tu cuenta</h1>
